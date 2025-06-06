@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Instant Weather V2</title>
+  
+  <!-- Police Google Fonts Inter pour un rendu moderne et lisible -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" />
+  
+  <!-- Styles personnalisés -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <!-- Titre principal de la page -->
+    <h1>🌦️ Instant Weather V2</h1>
+    
+    <!-- Bouton de bascule de thème -->
+    <button id="themeToggle" class="theme-toggle" aria-label="Basculer entre les thèmes clair et sombre">
+      <span class="theme-icon">🌙</span>
+    </button>
+  </header>
+
+  <main>
+    <!-- Section d'historique des recherches -->
+    <section id="searchHistory" class="search-history" style="display: none;">
+      <h2>Historique des recherches</h2>
+      <div id="historyButtons" class="history-buttons"></div>
+    </section>
+
+    <!-- Formulaire principal de recherche météo -->
+    <form id="weatherForm">
+      <!-- Saisie du code postal (5 chiffres) -->
+      <div class="form-group">
+        <label for="postalCodeInput">Code postal</label>
+        <input type="text" id="postalCodeInput" placeholder="Ex : 75001" required pattern="\d{5}"/>
+      </div>
+
+      <!-- Sélection dynamique des communes liées au code postal -->
+      <div class="form-group">
+        <label for="communeSelect">Choisissez la commune</label>
+        <select id="communeSelect" required>
+          <option value="">-- Veuillez entrer un code postal --</option>
+        </select>
+      </div>
+
+      <!-- Sélection du nombre de jours pour la prévision météo -->
+      <div class="form-group">
+        <label for="daysSelect">Prévisions sur combien de jours ?</label>
+        <select id="daysSelect" disabled>
+          <option value="1">1 jour</option>
+          <option value="2">2 jours</option>
+          <option value="3">3 jours</option>
+          <option value="4">4 jours</option>
+          <option value="5">5 jours</option>
+          <option value="6">6 jours</option>
+          <option value="7" selected>7 jours</option>
+        </select>
+      </div>
+
+      <!-- Options d'affichage supplémentaires -->
+      <div class="form-group">
+        <label>Informations supplémentaires</label>
+        <div class="checkbox-group">
+          <label class="checkbox-item">
+            <input type="checkbox" id="showLatitude">
+            <span class="checkmark"></span>
+            Afficher la latitude
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" id="showLongitude">
+            <span class="checkmark"></span>
+            Afficher la longitude
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" id="showRain" checked>
+            <span class="checkmark"></span>
+            Afficher les précipitations
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" id="showWindSpeed" checked>
+            <span class="checkmark"></span>
+            Afficher la vitesse du vent
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" id="showWindDirection">
+            <span class="checkmark"></span>
+            Afficher la direction du vent
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" id="showMap" checked>
+            <span class="checkmark"></span>
+            Afficher la carte
+          </label>
+        </div>
+      </div>
+
+      <!-- Bouton pour soumettre la recherche météo -->
+      <button type="submit">🔍 Afficher la météo</button>
+    </form>
+
+    <!-- Carte interactive -->
+    <section id="mapContainer" class="map-container" style="display: none;">
+      <h2>Localisation</h2>
+      <div id="map" class="map"></div>
+    </section>
+
+    <!-- Zone où s'affichent les résultats météo (accessible) -->
+    <section id="weatherResults" aria-live="polite"></section>
+  </main>
+
+  <footer>
+    <p>Projet individuel JavaScript — Instant Weather V2</p>
+  </footer>
+
+  <!-- Leaflet JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+  
+  <!-- Script principal de l'application -->
+  <script src="script.js"></script>
+</body>
+</html>
+
